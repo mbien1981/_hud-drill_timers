@@ -2,7 +2,7 @@ local module = DMod:new("_hud-drill_timers", {
 	name = "_hud-drill_timers",
 	description = "Standalone drill times.",
 	author = "_atom",
-	version = "2.0-final",
+	version = "2.1-final",
 	dependencies = { "[_hud]" },
 	categories = { "hud", "QoL", "gameplay" },
 })

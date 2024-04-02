@@ -264,12 +264,12 @@ function CustomTimerGUI:get_timer_string(data)
 end
 
 function CustomTimerGUI:update_item(timer_gui)
-	if not next(self.items) then
+	if not self:exists(timer_gui._unit) then
+		self:add(timer_gui)
 		return
 	end
 
-	if not self:exists(timer_gui._unit) then
-		self:add(timer_gui)
+	if not next(self.items) then
 		return
 	end
 
