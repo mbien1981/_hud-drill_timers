@@ -175,6 +175,8 @@ function CustomTimerGUI:add(timer_gui)
 			font_size = self.font.size,
 			layer = 1,
 			color = Color.white,
+			align = "center",
+			vertical = "center",
 		})
 		self._toolbox:make_pretty_text(stage_counter)
 	end
@@ -186,6 +188,8 @@ function CustomTimerGUI:add(timer_gui)
 		font_size = self.font.size,
 		layer = 1,
 		color = Color.white,
+		align = "center",
+		vertical = "center",
 	})
 	self._toolbox:make_pretty_text(timer)
 
