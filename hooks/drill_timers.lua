@@ -154,9 +154,8 @@ function CustomTimerGUI:add(timer_gui)
 	end
 
 	local texture, texture_rect = tweak_data.hud_icons:get_icon_data(self:get_icon(timer_gui))
-	local size = texture_rect[3] * tweak_data.scale.hud_equipment_icon_multiplier
 
-	local panel = self.item_container:panel({ h = size })
+	local panel = self.item_container:panel({ h = 38 })
 
 	local timer_container = panel:panel({
 		name = "timer_container",
@@ -195,8 +194,8 @@ function CustomTimerGUI:add(timer_gui)
 		texture = texture,
 		texture_rect = texture_rect,
 		layer = 1,
-		w = size,
-		h = size,
+		w = 30,
+		h = 30,
 	})
 
 	timer:set_center(timer_container:center())
