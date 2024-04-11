@@ -148,12 +148,23 @@ function CustomTimerGUI:get_icon(timer_gui)
 	return icon
 end
 
+function CustomTimerGUI:get_status_icon(timer_gui)
+	local unit = timer_gui._unit
+	local current_level_id = Global.level_data.level_id
+	if alive(unit) then
+		local is_drill = unit:base() and not unit:base().is_hacking_device
+		if (current_level_id == "suburbia" and is_drill) or timer_gui._current_bar then
+			return "mugshot_electrified"
+		end
+	end
+
+	return "assault"
+end
+
 function CustomTimerGUI:add(timer_gui)
 	if self:exists(timer_gui._unit) then
 		return
 	end
-
-	local texture, texture_rect = tweak_data.hud_icons:get_icon_data(self:get_icon(timer_gui))
 
 	local panel = self.item_container:panel({ h = 38 })
 
@@ -193,10 +204,22 @@ function CustomTimerGUI:add(timer_gui)
 	})
 	self._toolbox:make_pretty_text(timer)
 
+	local texture, texture_rect = tweak_data.hud_icons:get_icon_data(self:get_icon(timer_gui))
 	local icon = panel:bitmap({
 		name = "icon",
 		texture = texture,
 		texture_rect = texture_rect,
+		layer = 1,
+		w = 30,
+		h = 30,
+	})
+
+	texture, texture_rect = tweak_data.hud_icons:get_icon_data(self:get_status_icon(timer_gui))
+	local status_icon = panel:bitmap({
+		name = "status_icon",
+		texture = texture,
+		texture_rect = texture_rect,
+		visible = false,
 		layer = 1,
 		w = 30,
 		h = 30,
@@ -212,6 +235,9 @@ function CustomTimerGUI:add(timer_gui)
 		stage_container:child("stage_counter"):set_center(timer_container:center())
 		stage_container:set_right(timer_container:left() - 4)
 	end
+
+	status_icon:set_right((stage_container or timer_container):left() - 4)
+	status_icon:set_center_y(timer_container:center_y())
 
 	table.insert(self.items, {
 		unit = timer_gui._unit,
@@ -284,18 +310,23 @@ function CustomTimerGUI:update_item(timer_gui)
 	item.data.paused = timer_gui._jammed or not timer_gui._powered
 
 	local timer = item.panel:child("timer_container"):child("timer")
+	local status_icon = item.panel:child("status_icon")
 
 	if item.data.paused and not item.data.animating then
 		item.data.animating = true
 		timer:stop()
 		timer:set_color(Color("FF7A7A"))
 		timer:animate(self._hud.flash_assault_title)
+		status_icon:show()
+		status_icon:animate(self._hud.flash_assault_title)
 	end
 
 	if item.data.animating and not item.data.paused then
 		item.data.animating = false
 		timer:stop()
 		timer:set_color(Color.white)
+		status_icon:stop()
+		status_icon:hide()
 	end
 
 	timer:set_text(self:get_timer_string(item.data))
