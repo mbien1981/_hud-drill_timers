@@ -107,7 +107,7 @@ end
 function CustomTimerGUI:setup_panels()
 	self.main_panel = self._panel:panel()
 
-	self.item_container = self.main_panel:panel({ w = 200 })
+	self.item_container = self.main_panel:panel({ w = 200, h = 38 * 5 })
 
 	local y = 122
 	local custom_control_panel = self.super._hud.custom_control_panel
