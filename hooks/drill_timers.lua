@@ -203,15 +203,15 @@ function CustomTimerGUI:add(timer_gui)
 	})
 
 	timer:set_center(timer_container:center())
-	timer_container:set_right(panel:right())
+	icon:set_right(panel:right())
+	timer_container:set_right(icon:left() - 4)
+
+	icon:set_center_y(timer_container:center_y())
 
 	if alive(stage_container) then
 		stage_container:child("stage_counter"):set_center(timer_container:center())
 		stage_container:set_right(timer_container:left() - 4)
 	end
-
-	icon:set_right((stage_container or timer_container):left() - 4)
-	icon:set_center_y(timer_container:center_y())
 
 	table.insert(self.items, {
 		unit = timer_gui._unit,
