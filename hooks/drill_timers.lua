@@ -96,12 +96,12 @@ function CustomTimerGUI:init(super)
 	self.items = {}
 
 	self._toolbox = _M._hudToolBox
-	self._updator = _M._hudUpdator
+	self._updater = _M._hudUpdater
 
 	self:setup_panels()
 
-	self._updator:remove("timer_gui_update")
-	self._updator:add(callback(self, self, "update"), "timer_gui_update")
+	self._updater:remove("timer_gui_update")
+	self._updater:add(callback(self, self, "update"), "timer_gui_update")
 end
 
 function CustomTimerGUI:setup_panels()
