@@ -12,7 +12,7 @@ module:hook_post_require("lib/units/props/timergui", "hooks/drill_timers")
 module:hook_post_require("lib/units/props/securitylockgui", "hooks/drill_timers")
 
 module:hook_post_require("lib/setups/setup", "classes/toolbox")
-module:hook_post_require("lib/setups/setup", "classes/updator")
+module:hook_post_require("lib/setups/setup", "classes/updater")
 module:hook_post_require("core/lib/setups/coresetup", "classes/updater")
 
 return module
